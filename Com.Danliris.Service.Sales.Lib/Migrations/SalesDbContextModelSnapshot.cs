@@ -88,6 +88,11 @@ namespace Com.Danliris.Service.Sales.Lib.Migrations
 
                     b.Property<DateTimeOffset>("ApprovedIEDate");
 
+                    b.Property<string>("ApprovedKadivMDBy")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTimeOffset>("ApprovedKadivMDDate");
+
                     b.Property<string>("ApprovedMDBy")
                         .HasMaxLength(50);
 
@@ -194,6 +199,8 @@ namespace Com.Danliris.Service.Sales.Lib.Migrations
 
                     b.Property<bool>("IsApprovedIE");
 
+                    b.Property<bool>("IsApprovedKadivMD");
+
                     b.Property<bool>("IsApprovedMD");
 
                     b.Property<bool>("IsApprovedPPIC");
@@ -209,6 +216,8 @@ namespace Com.Danliris.Service.Sales.Lib.Migrations
                     b.Property<bool>("IsROAvailable");
 
                     b.Property<bool>("IsRODistributed");
+
+                    b.Property<bool>("IsValidatedROMD");
 
                     b.Property<bool>("IsValidatedROPPIC");
 
@@ -320,10 +329,20 @@ namespace Com.Danliris.Service.Sales.Lib.Migrations
                     b.Property<string>("UnitName")
                         .HasMaxLength(255);
 
+                    b.Property<string>("ValidationMDBy")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTimeOffset>("ValidationMDDate");
+
                     b.Property<string>("ValidationPPICBy")
                         .HasMaxLength(50);
 
                     b.Property<DateTimeOffset>("ValidationPPICDate");
+
+                    b.Property<string>("ValidationSampleBy")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTimeOffset>("ValidationSampleDate");
 
                     b.Property<int>("WageId");
 
@@ -416,11 +435,20 @@ namespace Com.Danliris.Service.Sales.Lib.Migrations
 
                     b.Property<DateTime>("LastModifiedUtc");
 
+                    b.Property<int>("MaterialIndex");
+
                     b.Property<string>("PO")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("POMaster")
                         .HasMaxLength(50);
 
                     b.Property<string>("PO_SerialNumber")
                         .HasMaxLength(50);
+
+                    b.Property<long>("PRMasterId");
+
+                    b.Property<long>("PRMasterItemId");
 
                     b.Property<double>("Price");
 
@@ -1227,6 +1255,73 @@ namespace Com.Danliris.Service.Sales.Lib.Migrations
                     b.HasIndex("WeeklyPlanId");
 
                     b.ToTable("GarmentWeeklyPlanItems");
+                });
+
+            modelBuilder.Entity("Com.Danliris.Service.Sales.Lib.Models.GarmentOmzetTargetModel.GarmentOmzetTarget", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Active");
+
+                    b.Property<double>("Amount");
+
+                    b.Property<string>("CreatedAgent")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<DateTime>("CreatedUtc");
+
+                    b.Property<string>("DeletedAgent")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<string>("DeletedBy")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<DateTime>("DeletedUtc");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("LastModifiedAgent")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<string>("LastModifiedBy")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<DateTime>("LastModifiedUtc");
+
+                    b.Property<string>("MonthOfPeriod")
+                        .HasMaxLength(10);
+
+                    b.Property<string>("QuaterCode")
+                        .HasMaxLength(5);
+
+                    b.Property<string>("SectionCode")
+                        .HasMaxLength(5);
+
+                    b.Property<int>("SectionId");
+
+                    b.Property<string>("SectionName")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("UId")
+                        .HasMaxLength(255);
+
+                    b.Property<string>("YearOfPeriod")
+                        .HasMaxLength(4);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GarmentOmzetTargets");
                 });
 
             modelBuilder.Entity("Com.Danliris.Service.Sales.Lib.Models.GarmentPreSalesContractModel.GarmentPreSalesContract", b =>
@@ -2194,6 +2289,12 @@ namespace Com.Danliris.Service.Sales.Lib.Migrations
 
                     b.Property<DateTime>("DeletedUtc");
 
+                    b.Property<string>("DocumentsFileName")
+                        .HasMaxLength(255);
+
+                    b.Property<string>("DocumentsPath")
+                        .HasMaxLength(1000);
+
                     b.Property<string>("ImagesName")
                         .HasMaxLength(255);
 
@@ -2278,6 +2379,8 @@ namespace Com.Danliris.Service.Sales.Lib.Migrations
 
                     b.Property<long>("RO_GarmentId");
 
+                    b.Property<int>("SizeBreakdownIndex");
+
                     b.Property<int>("Total");
 
                     b.Property<string>("UId")
@@ -2342,6 +2445,8 @@ namespace Com.Danliris.Service.Sales.Lib.Migrations
 
                     b.Property<string>("Size")
                         .HasMaxLength(50);
+
+                    b.Property<int>("SizeBreakdownDetailIndex");
 
                     b.Property<string>("UId")
                         .HasMaxLength(255);

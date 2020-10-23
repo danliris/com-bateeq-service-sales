@@ -124,7 +124,7 @@ namespace Com.Danliris.Service.Sales.Lib.BusinessLogic.Facades.CostCalculationGa
                             string CfrmDate = item.ConfirmDate == new DateTime(1970, 1, 1) ? "-" : item.ConfirmDate.ToOffset(new TimeSpan(offset, 0, 0)).ToString("dd MMM yyyy", new CultureInfo("id-ID"));
                             string ShipDate = item.DeliveryDate == new DateTime(1970, 1, 1) ? "-" : item.DeliveryDate.ToOffset(new TimeSpan(offset, 0, 0)).ToString("dd MMM yyyy", new CultureInfo("id-ID"));
                             string QtyOrder = string.Format("{0:N2}", item.Quantity);
-                            string CnfrmPrice = string.Format("{0:N2}", item.ConfirmPrice);
+                            string CnfrmPrice = string.Format("{0:N4}", item.ConfirmPrice);
                             string Amount = string.Format("{0:N2}", item.Amount);
 
                             result.Rows.Add(index, item.RO_Number, CfrmDate, ShipDate, item.UnitName, item.Section, item.Article, item.Comodity, item.Description,
@@ -159,12 +159,8 @@ namespace Com.Danliris.Service.Sales.Lib.BusinessLogic.Facades.CostCalculationGa
             var Query = CostCalculationByUnitReportLogic.GetQuery(filter);
             var data = Query.ToList();
 
-            Pageable<CostCalculationGarmentByUnitReportViewModel> pageable = new Pageable<CostCalculationGarmentByUnitReportViewModel>(data, page - 1, size);
-            List<CostCalculationGarmentByUnitReportViewModel> Data_ = pageable.Data.ToList<CostCalculationGarmentByUnitReportViewModel>();
-
-            int TotalData = pageable.TotalCount;
-
-            return Tuple.Create(Data_, TotalData);
+            int TotalData = data.Count();
+            return Tuple.Create(data, TotalData);
         }     
     }
 }
