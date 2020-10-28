@@ -65,6 +65,9 @@ using Com.Danliris.Service.Sales.Lib.BusinessLogic.Logic.GarmentMasterPlan.MaxWH
 using Com.Danliris.Service.Sales.Lib.BusinessLogic.Facades.GarmentPreSalesContractFacades;
 using Com.Danliris.Service.Sales.Lib.BusinessLogic.Interface.GarmentPreSalesContractInterface;
 using Com.Danliris.Service.Sales.Lib.BusinessLogic.Logic.GarmentPreSalesContractLogics;
+using Com.Danliris.Service.Sales.Lib.BusinessLogic.Interface.GarmentOmzetTargetInterface;
+using Com.Danliris.Service.Sales.Lib.BusinessLogic.Facades.GarmentOmzetTargetFacades;
+using Com.Danliris.Service.Sales.Lib.BusinessLogic.Logic.GarmentOmzetTargetLogics;
 
 namespace Com.Danliris.Service.Sales.WebApi
 {
@@ -94,11 +97,25 @@ namespace Com.Danliris.Service.Sales.WebApi
                 .AddTransient<WeavingSalesContractReportFacade>()
 				.AddTransient<ICostCalculationGarment,CostCalculationGarmentFacade>()
                 .AddTransient<ICostCalculationGarmentByUnitReport, CostCalculationGarmentByUnitReportFacade>()
+                .AddTransient<ICostCalculationGarmentBySectionReport, CostCalculationGarmentBySectionReportFacade>()
+                .AddTransient<ICostCalculationGarmentByBuyer1Report, CostCalculationGarmentByBuyer1ReportFacade>()
+                .AddTransient<ICostCalculationGarmentByBuyer2Report, CostCalculationGarmentByBuyer2ReportFacade>()
+                .AddTransient<IDetailCMGarmentByUnitReport, DetailCMGarmentByUnitReportFacade>()
+                .AddTransient<IDistributionROGarmentReport, DistributionROGarmentReportFacade>()
+                .AddTransient<ICostCalculationGarmentValidationReport, CostCalculationGarmentValidationReportFacade>()
+                .AddTransient<IProfitGarmentBySectionReport, ProfitGarmentBySectionReportFacade>()
+                .AddTransient<IAvailableROGarmentReportFacade, AvailableROGarmentReportFacade>()
+                .AddTransient<ICostCalculationGarmentApprovalReport, CostCalculationGarmentApprovalReportFacade>()
+                .AddTransient<IProfitGarmentByComodityReport, ProfitGarmentByComodityReportFacade>()
+                .AddTransient<IBudgetExportGarmentReport, BudgetExportGarmentReportFacade>()
+                .AddTransient<ICCGEmbroideryApprovalReport, CCGEmbroideryApprovalReportFacade>()
+                .AddTransient<ICCROGarmentHistoryBySectionReport, CCROGarmentHistoryBySectionReportFacade>()
                 .AddTransient<IROGarment, ROGarmentFacade>()
                 .AddTransient<IArticleColor, ArticleColorFacade>()
                 .AddTransient<IRate, RateFacade>()
                 .AddTransient<IEfficiency, EfficiencyFacade>()
                 .AddTransient<IAzureImageFacade, AzureImageFacade>()
+                .AddTransient<IAzureDocumentFacade, AzureDocumentFacade>()
                 .AddTransient<IGarment_BudgetValidationPPIC, Garment_BudgetValidationPPICFacade>()
                 .AddTransient<IGarmentBookingOrder, GarmentBookingOrderFacade>()
                 .AddTransient<IWeeklyPlanFacade, WeeklyPlanFacade>()
@@ -111,7 +128,13 @@ namespace Com.Danliris.Service.Sales.WebApi
                 .AddTransient<IOverScheduleMonitoringFacade, OverScheduleMonitoringFacade>()
                 .AddTransient<IWeeklyWorkingScheduleMonitoringFacade, WeeklyWorkingScheduleMonitoringFacade>()
                 .AddTransient<IMaxWHConfirmFacade, MaxWHConfirmFacade>()
-                .AddTransient<IGarmentPreSalesContract, GarmentPreSalesContractFacade>();
+                .AddTransient<IBudgetJobOrderDisplayFacade, BudgetJobOrderDisplayFacade>()
+                .AddTransient<IMonitoringUnpostCostCalculationFacade, MonitoringUnpostCostCalculationFacade>()
+                .AddTransient<IAcceptedROReportFacade, AcceptedROReportFacade>()
+                .AddTransient<IAvailableROReportFacade, AvailableROReportFacade>()
+                .AddTransient<IAvailableBudgetReportFacade, AvailableBudgetReportFacade>()
+                .AddTransient<IGarmentPreSalesContract, GarmentPreSalesContractFacade>()
+                .AddTransient<IGarmentOmzetTarget, GarmentOmzetTargetFacade>();
         }
 
         private void RegisterLogic(IServiceCollection services)
@@ -130,6 +153,19 @@ namespace Com.Danliris.Service.Sales.WebApi
 				.AddTransient<CostCalculationGarmentMaterialLogic>()
                 .AddTransient<CostCalculationByUnitReportLogic>()
                 .AddTransient<GarmentSalesContractLogic>()
+                .AddTransient<CostCalculationBySectionReportLogic>()
+                .AddTransient<CostCalculationByBuyer1ReportLogic>()
+                .AddTransient<CostCalculationByBuyer2ReportLogic>()
+                .AddTransient<DetailCMGarmentByUnitReportLogic>()
+                .AddTransient<DistributionROGarmentReportLogic>()
+                .AddTransient<CostCalculationGarmentValidationReportLogic>()
+                .AddTransient<ProfitGarmentBySectionReportLogic>()
+                .AddTransient<AvailableROGarmentReportLogic>()
+                .AddTransient<CostCalculationGarmentApprovalReportLogic>()
+                .AddTransient<ProfitGarmentByComodityReportLogic>()
+                .AddTransient<BudgetExportGarmentReportLogic>()
+                .AddTransient<CCGEmbroideryApprovalReportLogic>()
+                .AddTransient<CCROGarmentHistoryBySectionReportLogic>()
                 .AddTransient<GarmentSalesContractItemLogic>()
                 .AddTransient<ArticleColorLogic>()
                 .AddTransient<ROGarmentLogic>()
@@ -148,7 +184,14 @@ namespace Com.Danliris.Service.Sales.WebApi
                 .AddTransient<OverScheduleMonitoringLogic>()
                 .AddTransient<WeeklyWorkingScheduleMonitoringLogic>()
                 .AddTransient<MaxWHConfirmLogic>()
-                .AddTransient<GarmentPreSalesContractLogic>();
+                .AddTransient<BudgetJobOrderDisplayLogic>()
+                .AddTransient<MonitoringUnpostCostCalculationLogic>()
+                .AddTransient<AcceptedROReportLogic>()
+                .AddTransient<AvailableROReportLogic>()
+                .AddTransient<AvailableBudgetReportLogic>()
+                .AddTransient<MonitoringPreSalesContractLogic>()
+                .AddTransient<GarmentPreSalesContractLogic>()
+                .AddTransient<GarmentOmzetTargetLogic>();
             
         }
 
