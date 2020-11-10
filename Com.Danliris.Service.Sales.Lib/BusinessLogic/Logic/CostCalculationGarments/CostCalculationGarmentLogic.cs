@@ -147,7 +147,7 @@ namespace Com.Danliris.Service.Sales.Lib.BusinessLogic.Logic.CostCalculationGarm
 		{
 			int lastFabricNumber = GetLastMaterialFabricNumberByCategoryName(model.UnitCode);
 			int lastNonFabricNumber = GetLastMaterialNonFabricNumberByCategoryName(model.UnitCode);
-            List<string> convectionOption = new List<string> { "EF4", "C2A", "C2B", "C2C", "C1A", "C1B" };
+            List<string> convectionOption = new List<string> { "E05", "C2A", "C2B", "C2C", "C1A", "C1B" };
             int convectionCode = convectionOption.IndexOf(model.UnitCode) + 1;
 
             DateTime Now = DateTime.Now;
