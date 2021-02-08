@@ -7,6 +7,8 @@ namespace Com.Danliris.Service.Sales.Lib.ViewModels.CostCalculationGarment
 {
     public class CostCalculationGarment_MaterialViewModel : BaseViewModel
     {
+        public int MaterialIndex { get; set; }
+
         public string Code { get; set; }
         public string PO_SerialNumber { get; set; }
         public string PO { get; set; }
@@ -30,5 +32,11 @@ namespace Com.Danliris.Service.Sales.Lib.ViewModels.CostCalculationGarment
         public bool IsPosted { get; set; }
 
         public bool? IsPRMaster { get; set; } // Terisi waktu validasi RO, cek apakah barang dibuat PR Master
+
+        public long PRMasterId { get; set; }
+        public long PRMasterItemId { get; set; }
+        public string POMaster { get; set; }
+
+        public double AvailableQuantity { get; set; } // untuk validasi
     }
 }

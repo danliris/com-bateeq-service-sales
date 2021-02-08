@@ -5,11 +5,15 @@ using Com.Danliris.Service.Sales.Lib.BusinessLogic.Facades.GarmentPreSalesContra
 using Com.Danliris.Service.Sales.Lib.BusinessLogic.Logic.GarmentPreSalesContractLogics;
 using Com.Danliris.Service.Sales.Lib.Models.GarmentPreSalesContractModel;
 using Com.Danliris.Service.Sales.Lib.Services;
+using Com.Danliris.Service.Sales.Lib.ViewModels.GarmentPreSalesContractViewModels;
 using Microsoft.AspNetCore.JsonPatch;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Com.Danliris.Sales.Test.BussinesLogic.Facades.GarmentPreSalesContractTest
@@ -71,6 +75,20 @@ namespace Com.Danliris.Sales.Test.BussinesLogic.Facades.GarmentPreSalesContractT
         }
 
         [Fact]
+        public async void PreSalesPost_Throws_Exception()
+        {
+            //Setup
+            var dbContext = DbContext(GetCurrentMethod());
+            var serviceProvider = GetServiceProviderMock(dbContext).Object;
+
+            //Act
+            GarmentPreSalesContractFacade facade = new GarmentPreSalesContractFacade(serviceProvider, dbContext);
+
+            //Assert
+            await Assert.ThrowsAsync<Exception>(() => facade.PreSalesPost(null, null));
+        }
+
+        [Fact]
         public async void PreSalesUnPost_Success()
         {
             var dbContext = DbContext(GetCurrentMethod());
@@ -80,6 +98,30 @@ namespace Com.Danliris.Sales.Test.BussinesLogic.Facades.GarmentPreSalesContractT
             var data = await DataUtil(facade).GetTestData();
             var Response = await facade.PreSalesUnpost(data.Id, "test");
             Assert.NotEqual(Response, 0);
+        }
+
+        [Fact]
+        public async Task PreSalesUnPost_Throws_Exception()
+        {
+            //Setup
+            var dbContext = DbContext(GetCurrentMethod());
+            var serviceProvider = GetServiceProviderMock(dbContext).Object;
+
+            //Act
+            GarmentPreSalesContractFacade facade = new GarmentPreSalesContractFacade(serviceProvider, dbContext);
+
+            //Assert
+            await Assert.ThrowsAsync<Exception>(() => facade.PreSalesUnpost(1,null));
+        }
+
+        [Fact]
+        public void Validate_ViewModel()
+        {
+            GarmentPreSalesContractViewModel viewModel = new GarmentPreSalesContractViewModel();
+
+            var response = viewModel.Validate(new ValidationContext(viewModel, null, null));
+
+            Assert.NotEmpty(response.ToList());
         }
     }
 }

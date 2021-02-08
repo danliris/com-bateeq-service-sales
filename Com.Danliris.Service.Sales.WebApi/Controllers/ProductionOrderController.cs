@@ -3,6 +3,7 @@ using Com.Danliris.Service.Sales.Lib.BusinessLogic.Interface.ProductionOrder;
 using Com.Danliris.Service.Sales.Lib.Models.ProductionOrder;
 using Com.Danliris.Service.Sales.Lib.PDFTemplates;
 using Com.Danliris.Service.Sales.Lib.Services;
+using Com.Danliris.Service.Sales.Lib.Utilities;
 using Com.Danliris.Service.Sales.Lib.ViewModels.ProductionOrder;
 using Com.Danliris.Service.Sales.WebApi.Utilities;
 using Microsoft.AspNetCore.Authorization;
@@ -52,6 +53,34 @@ namespace Com.Danliris.Service.Sales.WebApi.Controllers
                 await _facade.UpdateRequestedTrue(ids);
 
                 return NoContent();
+            }
+            catch (Exception e)
+            {
+                Dictionary<string, object> Result =
+                    new ResultFormatter(ApiVersion, Common.INTERNAL_ERROR_STATUS_CODE, e.Message)
+                    .Fail();
+                return StatusCode(Common.INTERNAL_ERROR_STATUS_CODE, Result);
+            }
+        }
+
+
+        //[HttpGet("filter-by-sales-contract/{salesContractId}")]
+        [HttpGet("filter-by-sales-contract/{salesContractId}")]
+        public virtual IActionResult ReadBySalesContractId([FromRoute] long salesContractId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                List<ProductionOrderModel> model = Facade.ReadBySalesContractId(salesContractId);
+                List<ProductionOrderViewModel> viewModel = Mapper.Map<List<ProductionOrderViewModel>>(model);
+                Dictionary<string, object> Result =
+                    new ResultFormatter(ApiVersion, Common.OK_STATUS_CODE, Common.OK_MESSAGE)
+                    .Ok(Mapper, viewModel, 1, viewModel.Count, viewModel.Count, viewModel.Count, new Dictionary<string, string>(), new List<string>());
+                return Ok(Result);
             }
             catch (Exception e)
             {
@@ -334,7 +363,7 @@ namespace Com.Danliris.Service.Sales.WebApi.Controllers
             try
             {
                 IdentityService.Username = User.Claims.ToArray().SingleOrDefault(p => p.Type.Equals("username")).Value;
-               
+
                 if (id == 0)
                 {
                     Dictionary<string, object> Result =
@@ -345,6 +374,37 @@ namespace Com.Danliris.Service.Sales.WebApi.Controllers
                 await _facade.UpdateIsCalculated(id, flag);
 
                 return NoContent();
+            }
+            catch (Exception e)
+            {
+                Dictionary<string, object> Result =
+                    new ResultFormatter(ApiVersion, Common.INTERNAL_ERROR_STATUS_CODE, e.Message)
+                    .Fail();
+                return StatusCode(Common.INTERNAL_ERROR_STATUS_CODE, Result);
+            }
+        }
+
+        [HttpGet("construction-loader")]
+        public virtual IActionResult GetConstruction(int page = 1, int size = 25, string order = "{}", [Bind(Prefix = "Select[]")] List<string> select = null, string keyword = null, string filter = "{}")
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
+
+            try
+            {
+                ValidateUser();
+
+                var read = Facade.ReadConstruction(page, size, keyword, filter);
+
+                var data = read.Select(e => new ProductionOrderViewModel { Code = e }).ToList();
+
+                Dictionary<string, object> Result =
+                    new ResultFormatter(ApiVersion, Common.OK_STATUS_CODE, Common.OK_MESSAGE)
+                    .Ok<ProductionOrderViewModel>(Mapper, data, page, size, data.Count, data.Count, new Dictionary<string, string>(), new List<string>());
+                return Ok(Result);
+
             }
             catch (Exception e)
             {

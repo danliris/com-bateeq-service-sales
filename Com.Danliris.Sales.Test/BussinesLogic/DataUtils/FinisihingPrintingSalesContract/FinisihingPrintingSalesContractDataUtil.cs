@@ -30,9 +30,10 @@ namespace Com.Danliris.Sales.Test.BussinesLogic.DataUtils.FinisihingPrintingSale
                 {
                     new FinishingPrintingSalesContractDetailModel()
                     {
-                        Color = "c",
+                        Color = "ColorType",
                         UseIncomeTax = true,
-                        Price = 1
+                        Price = 1,
+                        ScreenCost = 1
                     }
                 },
                 BuyerType = "type"

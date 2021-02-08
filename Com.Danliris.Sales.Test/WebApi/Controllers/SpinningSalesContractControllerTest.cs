@@ -30,6 +30,19 @@ namespace Com.Danliris.Sales.Test.WebApi.Controllers
         }
 
         [Fact]
+        public void GetPDF_Return_BadRequest()
+        {
+            var mocks = GetMocks();
+            var controller = GetController(mocks);
+            controller.ModelState.AddModelError("key", "error");
+            var response = controller.GetPDF(1).Result;
+
+            int statusCode = this.GetStatusCode(response);
+            Assert.Equal((int)HttpStatusCode.BadRequest, statusCode);
+
+        }
+
+        [Fact]
         public void Get_PDF_Exception()
         {
             var mocks = GetMocks();
@@ -86,7 +99,7 @@ namespace Com.Danliris.Sales.Test.WebApi.Controllers
                     Country = "a"
                 },
                 DeliverySchedule = DateTimeOffset.UtcNow,
-
+                ComodityDescription = "a"
             };
 
             mocks.Facade.Setup(x => x.ReadByIdAsync(It.IsAny<int>())).ReturnsAsync(Model);
@@ -144,6 +157,8 @@ namespace Com.Danliris.Sales.Test.WebApi.Controllers
                     Country = "a"
                 },
                 DeliverySchedule = DateTimeOffset.UtcNow,
+                ComodityDescription = "a",
+                TransportFee = "1"
 
             };
 

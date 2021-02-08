@@ -40,6 +40,20 @@ namespace Com.Danliris.Sales.Test.WebApi.Controllers
 
         }
 
+
+        [Fact]
+        public void Get_PDF_BadRequest()
+        {
+            var mocks = GetMocks();
+            var controller = GetController(mocks);
+            controller.ModelState.AddModelError("key", "value");
+            var response = controller.GetPDF(1).Result;
+
+            int statusCode = this.GetStatusCode(response);
+            Assert.Equal((int)HttpStatusCode.BadRequest, statusCode);
+
+        }
+
         [Fact]
         public void Get_PDF_Local_OK()
         {
@@ -99,7 +113,8 @@ namespace Com.Danliris.Sales.Test.WebApi.Controllers
                 MaterialConstruction = new Service.Sales.Lib.ViewModels.IntegrationViewModel.MaterialConstructionViewModel()
                 {
                     Name = "a"
-                }
+                },
+                ComodityDescription = "a"
             };
 
             mocks.Facade.Setup(x => x.ReadByIdAsync(It.IsAny<int>())).ReturnsAsync(Model);
@@ -171,7 +186,8 @@ namespace Com.Danliris.Sales.Test.WebApi.Controllers
                 MaterialConstruction = new Service.Sales.Lib.ViewModels.IntegrationViewModel.MaterialConstructionViewModel()
                 {
                     Name ="a"
-                }
+                },
+                ComodityDescription = "a"
             };
 
             mocks.Facade.Setup(x => x.ReadByIdAsync(It.IsAny<int>())).ReturnsAsync(Model);
