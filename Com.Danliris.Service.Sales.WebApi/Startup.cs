@@ -1,4 +1,3 @@
-﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AutoMapper;
@@ -61,6 +60,7 @@ using Com.Danliris.Service.Sales.Lib.BusinessLogic.Logic.GarmentPreSalesContract
 using Com.Danliris.Service.Sales.Lib.BusinessLogic.Interface.GarmentOmzetTargetInterface;
 using Com.Danliris.Service.Sales.Lib.BusinessLogic.Facades.GarmentOmzetTargetFacades;
 using Com.Danliris.Service.Sales.Lib.BusinessLogic.Logic.GarmentOmzetTargetLogics;
+
 using Swashbuckle.AspNetCore.Swagger;
 using Com.Danliris.Service.Sales.Lib.BusinessLogic.Interface.SalesInvoice;
 using Com.Danliris.Service.Sales.Lib.BusinessLogic.Facades.SalesInvoice;
@@ -86,6 +86,7 @@ using Com.Danliris.Service.Sales.Lib.BusinessLogic.Logic.DOAval;
 using Com.Danliris.Service.Sales.Lib.BusinessLogic.Logic.DOStock;
 using Com.Danliris.Service.Sales.Lib.BusinessLogic.Facades.DOStock;
 using Com.Danliris.Service.Sales.Lib.BusinessLogic.Interface.DOStock;
+
 
 namespace Com.Danliris.Service.Sales.WebApi
 {
@@ -118,7 +119,9 @@ namespace Com.Danliris.Service.Sales.WebApi
                 .AddTransient<ICostCalculationGarmentBySectionReport, CostCalculationGarmentBySectionReportFacade>()
                 .AddTransient<ICostCalculationGarmentByBuyer1Report, CostCalculationGarmentByBuyer1ReportFacade>()
                 .AddTransient<ICostCalculationGarmentByBuyer2Report, CostCalculationGarmentByBuyer2ReportFacade>()
+
                 .AddTransient<ISMVGarmentByUnitReport, SMVGarmentByUnitReportFacade>()
+
                 .AddTransient<IDetailCMGarmentByUnitReport, DetailCMGarmentByUnitReportFacade>()
                 .AddTransient<IDistributionROGarmentReport, DistributionROGarmentReportFacade>()
                 .AddTransient<ICostCalculationGarmentValidationReport, CostCalculationGarmentValidationReportFacade>()
@@ -149,6 +152,7 @@ namespace Com.Danliris.Service.Sales.WebApi
                 .AddTransient<IMaxWHConfirmFacade, MaxWHConfirmFacade>()
                 .AddTransient<IBudgetJobOrderDisplayFacade, BudgetJobOrderDisplayFacade>()
                 .AddTransient<IMonitoringUnpostCostCalculationFacade, MonitoringUnpostCostCalculationFacade>()
+
                 .AddTransient<IGarmentProductionOrderReportFacade, GarmentProductionOrderReportFacade>()
                 .AddTransient<IAcceptedROReportFacade, AcceptedROReportFacade>()
                 .AddTransient<IAvailableROReportFacade, AvailableROReportFacade>()
@@ -169,6 +173,13 @@ namespace Com.Danliris.Service.Sales.WebApi
                 .AddTransient<IDOAvalFacade, DOAvalFacade>()
                 .AddTransient<IDOStockFacade,DOStockFacade>()
                 .AddTransient<IDeliveryNoteProduction, DeliveryNoteProductionFacade>();
+
+                .AddTransient<IAcceptedROReportFacade, AcceptedROReportFacade>()
+                .AddTransient<IAvailableROReportFacade, AvailableROReportFacade>()
+                .AddTransient<IAvailableBudgetReportFacade, AvailableBudgetReportFacade>()
+                .AddTransient<IGarmentPreSalesContract, GarmentPreSalesContractFacade>()
+                .AddTransient<IGarmentOmzetTarget, GarmentOmzetTargetFacade>();
+
         }
 
         private void RegisterLogic(IServiceCollection services)
@@ -201,6 +212,19 @@ namespace Com.Danliris.Service.Sales.WebApi
                 .AddTransient<CCGEmbroideryApprovalReportLogic>()
                 .AddTransient<CCROGarmentHistoryBySectionReportLogic>()
                 .AddTransient<GarmentSalesContractLogic>()
+                .AddTransient<CostCalculationBySectionReportLogic>()
+                .AddTransient<CostCalculationByBuyer1ReportLogic>()
+                .AddTransient<CostCalculationByBuyer2ReportLogic>()
+                .AddTransient<DetailCMGarmentByUnitReportLogic>()
+                .AddTransient<DistributionROGarmentReportLogic>()
+                .AddTransient<CostCalculationGarmentValidationReportLogic>()
+                .AddTransient<ProfitGarmentBySectionReportLogic>()
+                .AddTransient<AvailableROGarmentReportLogic>()
+                .AddTransient<CostCalculationGarmentApprovalReportLogic>()
+                .AddTransient<ProfitGarmentByComodityReportLogic>()
+                .AddTransient<BudgetExportGarmentReportLogic>()
+                .AddTransient<CCGEmbroideryApprovalReportLogic>()
+                .AddTransient<CCROGarmentHistoryBySectionReportLogic>()
                 .AddTransient<GarmentSalesContractItemLogic>()
                 .AddTransient<ArticleColorLogic>()
                 .AddTransient<ROGarmentLogic>()
@@ -221,12 +245,14 @@ namespace Com.Danliris.Service.Sales.WebApi
                 .AddTransient<MaxWHConfirmLogic>()
                 .AddTransient<BudgetJobOrderDisplayLogic>()
                 .AddTransient<MonitoringUnpostCostCalculationLogic>()
+
                 .AddTransient<GarmentProductionOrderReportLogic>()
-                .AddTransient<AcceptedROReportLogic>()
+     .AddTransient<AcceptedROReportLogic>()
                 .AddTransient<AvailableROReportLogic>()
                 .AddTransient<AvailableBudgetReportLogic>()
                 .AddTransient<MonitoringPreSalesContractLogic>()
                 .AddTransient<GarmentPreSalesContractLogic>()
+
                 .AddTransient<GarmentPurchasingQualityObjectiveReportLogic>()
                 .AddTransient<GarmentOmzetTargetLogic>()
                 .AddTransient<DOSalesLogic>()
@@ -248,6 +274,7 @@ namespace Com.Danliris.Service.Sales.WebApi
                 .AddTransient<DOAvalLogic>()
                 .AddTransient<DOStockLogic>()
                 .AddTransient<DeliveryNoteProductionLogic>();
+
         }
 
         private void RegisterServices(IServiceCollection services)
