@@ -15,13 +15,11 @@ using Com.Danliris.Service.Sales.Lib.Models.GarmentSewingBlockingPlanModel;
 using Com.Danliris.Service.Sales.Lib.Models.GarmentMasterPlan.MaxWHConfirmModel;
 using Com.Danliris.Service.Sales.Lib.Models.GarmentPreSalesContractModel;
 using Com.Danliris.Service.Sales.Lib.Models.GarmentOmzetTargetModel;
-
 using Com.Danliris.Service.Sales.Lib.Models.SalesInvoice;
 using Com.Danliris.Service.Sales.Lib.Models.FinishingPrintingCostCalculation;
 using Com.Danliris.Service.Sales.Lib.Models.DOSales;
 using Com.Danliris.Service.Sales.Lib.Models.DOReturn;
 using Com.Danliris.Service.Sales.Lib.Models.SalesInvoiceExport;
-
 
 namespace Com.Danliris.Service.Sales.Lib
 {
@@ -35,8 +33,8 @@ namespace Com.Danliris.Service.Sales.Lib
         public DbSet<SpinningSalesContractModel> SpinningSalesContract { get; set; }
         public DbSet<FinishingPrintingSalesContractModel> FinishingPrintingSalesContracts { get; set; }
         public DbSet<FinishingPrintingSalesContractDetailModel> FinishingPrintingSalesContractDetails { get; set; }
-		public DbSet<CostCalculationGarment> CostCalculationGarments { get; set; }
-		public DbSet<CostCalculationGarment_Material> CostCalculationGarment_Materials { get; set; }
+        public DbSet<CostCalculationGarment> CostCalculationGarments { get; set; }
+        public DbSet<CostCalculationGarment_Material> CostCalculationGarment_Materials { get; set; }
         public DbSet<GarmentSalesContract> GarmentSalesContracts { get; set; }
         public DbSet<GarmentSalesContractItem> GarmentSalesContractItems { get; set; }
 
@@ -52,7 +50,7 @@ namespace Com.Danliris.Service.Sales.Lib
         public DbSet<RO_Garment_SizeBreakdown> RO_Garment_SizeBreakdowns { get; set; }
         public DbSet<RO_Garment_SizeBreakdown_Detail> RO_Garment_SizeBreakdown_Details { get; set; }
         public DbSet<Rate> Rates { get; set; }
-        //public DbSet<ArticleColor> ArticleColors { get; set; }
+        public DbSet<ArticleColor> ArticleColors { get; set; }
         public DbSet<Efficiency> Efficiencies { get; set; }
         public DbSet<GarmentBookingOrder> GarmentBookingOrders { get; set; }
         public DbSet<GarmentBookingOrderItem> GarmentBookingOrderItems { get; set; }
@@ -64,7 +62,6 @@ namespace Com.Danliris.Service.Sales.Lib
 
         public DbSet<MaxWHConfirm> MaxWHConfirms { get; set; }
         public DbSet<GarmentPreSalesContract> GarmentPreSalesContracts { get; set; }
-        public DbSet<GarmentOmzetTarget> GarmentOmzetTargets { get; set; }
         public DbSet<CostCalculationGarmentUnpostReason> CostCalculationGarmentUnpostReasons { get; set; }
         public DbSet<GarmentOmzetTarget> GarmentOmzetTargets { get; set; }
         public DbSet<FinishingPrintingPreSalesContractModel> FinishingPrintingPreSalesContracts { get; set; }
@@ -113,9 +110,6 @@ namespace Com.Danliris.Service.Sales.Lib
 
             modelBuilder.Entity<RO_Garment>()
                 .Ignore(c => c.ImagesFile);
-
-            modelBuilder.Entity<RO_Garment>()
-                .Ignore(c => c.DocumentsFile);
 
             modelBuilder.Entity<RO_Garment>()
                 .Ignore(c => c.DocumentsFile);
