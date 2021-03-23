@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AutoMapper;
@@ -60,7 +61,6 @@ using Com.Danliris.Service.Sales.Lib.BusinessLogic.Logic.GarmentPreSalesContract
 using Com.Danliris.Service.Sales.Lib.BusinessLogic.Interface.GarmentOmzetTargetInterface;
 using Com.Danliris.Service.Sales.Lib.BusinessLogic.Facades.GarmentOmzetTargetFacades;
 using Com.Danliris.Service.Sales.Lib.BusinessLogic.Logic.GarmentOmzetTargetLogics;
-
 using Swashbuckle.AspNetCore.Swagger;
 using Com.Danliris.Service.Sales.Lib.BusinessLogic.Interface.SalesInvoice;
 using Com.Danliris.Service.Sales.Lib.BusinessLogic.Facades.SalesInvoice;
@@ -86,7 +86,6 @@ using Com.Danliris.Service.Sales.Lib.BusinessLogic.Logic.DOAval;
 using Com.Danliris.Service.Sales.Lib.BusinessLogic.Logic.DOStock;
 using Com.Danliris.Service.Sales.Lib.BusinessLogic.Facades.DOStock;
 using Com.Danliris.Service.Sales.Lib.BusinessLogic.Interface.DOStock;
-
 
 namespace Com.Danliris.Service.Sales.WebApi
 {
@@ -114,14 +113,12 @@ namespace Com.Danliris.Service.Sales.WebApi
                 .AddTransient<IGarmentSalesContract, GarmentSalesContractFacade>()
                 .AddTransient<IProductionOrder, ProductionOrderFacade>()
                 .AddTransient<WeavingSalesContractReportFacade>()
-				.AddTransient<ICostCalculationGarment,CostCalculationGarmentFacade>()
+                .AddTransient<ICostCalculationGarment, CostCalculationGarmentFacade>()
                 .AddTransient<ICostCalculationGarmentByUnitReport, CostCalculationGarmentByUnitReportFacade>()
                 .AddTransient<ICostCalculationGarmentBySectionReport, CostCalculationGarmentBySectionReportFacade>()
                 .AddTransient<ICostCalculationGarmentByBuyer1Report, CostCalculationGarmentByBuyer1ReportFacade>()
                 .AddTransient<ICostCalculationGarmentByBuyer2Report, CostCalculationGarmentByBuyer2ReportFacade>()
-
                 .AddTransient<ISMVGarmentByUnitReport, SMVGarmentByUnitReportFacade>()
-
                 .AddTransient<IDetailCMGarmentByUnitReport, DetailCMGarmentByUnitReportFacade>()
                 .AddTransient<IDistributionROGarmentReport, DistributionROGarmentReportFacade>()
                 .AddTransient<ICostCalculationGarmentValidationReport, CostCalculationGarmentValidationReportFacade>()
@@ -152,7 +149,6 @@ namespace Com.Danliris.Service.Sales.WebApi
                 .AddTransient<IMaxWHConfirmFacade, MaxWHConfirmFacade>()
                 .AddTransient<IBudgetJobOrderDisplayFacade, BudgetJobOrderDisplayFacade>()
                 .AddTransient<IMonitoringUnpostCostCalculationFacade, MonitoringUnpostCostCalculationFacade>()
-
                 .AddTransient<IGarmentProductionOrderReportFacade, GarmentProductionOrderReportFacade>()
                 .AddTransient<IAcceptedROReportFacade, AcceptedROReportFacade>()
                 .AddTransient<IAvailableROReportFacade, AvailableROReportFacade>()
@@ -171,31 +167,24 @@ namespace Com.Danliris.Service.Sales.WebApi
                 .AddTransient<IShinProductionOrder, ShinProductionOrderFacade>()
                 .AddTransient<IHOrderFacade, HOrderFacade>()
                 .AddTransient<IDOAvalFacade, DOAvalFacade>()
-                .AddTransient<IDOStockFacade,DOStockFacade>()
+                .AddTransient<IDOStockFacade, DOStockFacade>()
                 .AddTransient<IDeliveryNoteProduction, DeliveryNoteProductionFacade>();
-
-                .AddTransient<IAcceptedROReportFacade, AcceptedROReportFacade>()
-                .AddTransient<IAvailableROReportFacade, AvailableROReportFacade>()
-                .AddTransient<IAvailableBudgetReportFacade, AvailableBudgetReportFacade>()
-                .AddTransient<IGarmentPreSalesContract, GarmentPreSalesContractFacade>()
-                .AddTransient<IGarmentOmzetTarget, GarmentOmzetTargetFacade>();
-
         }
 
         private void RegisterLogic(IServiceCollection services)
         {
 
-			services
-				.AddTransient<WeavingSalesContractLogic>()
-				.AddTransient<SpinningSalesContractLogic>()
-				.AddTransient<FinishingPrintingSalesContractLogic>()
-				.AddTransient<FinishingPrintingSalesContractDetailLogic>()
-				.AddTransient<ProductionOrder_DetailLogic>()
-				.AddTransient<ProductionOrder_LampStandardLogic>()
-				.AddTransient<ProductionOrder_RunWidthLogic>()
-				.AddTransient<ProductionOrderLogic>()
-				.AddTransient<CostCalculationGarmentLogic>()
-				.AddTransient<CostCalculationGarmentMaterialLogic>()
+            services
+                .AddTransient<WeavingSalesContractLogic>()
+                .AddTransient<SpinningSalesContractLogic>()
+                .AddTransient<FinishingPrintingSalesContractLogic>()
+                .AddTransient<FinishingPrintingSalesContractDetailLogic>()
+                .AddTransient<ProductionOrder_DetailLogic>()
+                .AddTransient<ProductionOrder_LampStandardLogic>()
+                .AddTransient<ProductionOrder_RunWidthLogic>()
+                .AddTransient<ProductionOrderLogic>()
+                .AddTransient<CostCalculationGarmentLogic>()
+                .AddTransient<CostCalculationGarmentMaterialLogic>()
                 .AddTransient<CostCalculationByUnitReportLogic>()
                 .AddTransient<CostCalculationBySectionReportLogic>()
                 .AddTransient<CostCalculationByBuyer1ReportLogic>()
@@ -212,19 +201,6 @@ namespace Com.Danliris.Service.Sales.WebApi
                 .AddTransient<CCGEmbroideryApprovalReportLogic>()
                 .AddTransient<CCROGarmentHistoryBySectionReportLogic>()
                 .AddTransient<GarmentSalesContractLogic>()
-                .AddTransient<CostCalculationBySectionReportLogic>()
-                .AddTransient<CostCalculationByBuyer1ReportLogic>()
-                .AddTransient<CostCalculationByBuyer2ReportLogic>()
-                .AddTransient<DetailCMGarmentByUnitReportLogic>()
-                .AddTransient<DistributionROGarmentReportLogic>()
-                .AddTransient<CostCalculationGarmentValidationReportLogic>()
-                .AddTransient<ProfitGarmentBySectionReportLogic>()
-                .AddTransient<AvailableROGarmentReportLogic>()
-                .AddTransient<CostCalculationGarmentApprovalReportLogic>()
-                .AddTransient<ProfitGarmentByComodityReportLogic>()
-                .AddTransient<BudgetExportGarmentReportLogic>()
-                .AddTransient<CCGEmbroideryApprovalReportLogic>()
-                .AddTransient<CCROGarmentHistoryBySectionReportLogic>()
                 .AddTransient<GarmentSalesContractItemLogic>()
                 .AddTransient<ArticleColorLogic>()
                 .AddTransient<ROGarmentLogic>()
@@ -245,14 +221,12 @@ namespace Com.Danliris.Service.Sales.WebApi
                 .AddTransient<MaxWHConfirmLogic>()
                 .AddTransient<BudgetJobOrderDisplayLogic>()
                 .AddTransient<MonitoringUnpostCostCalculationLogic>()
-
                 .AddTransient<GarmentProductionOrderReportLogic>()
-     .AddTransient<AcceptedROReportLogic>()
+                .AddTransient<AcceptedROReportLogic>()
                 .AddTransient<AvailableROReportLogic>()
                 .AddTransient<AvailableBudgetReportLogic>()
                 .AddTransient<MonitoringPreSalesContractLogic>()
                 .AddTransient<GarmentPreSalesContractLogic>()
-
                 .AddTransient<GarmentPurchasingQualityObjectiveReportLogic>()
                 .AddTransient<GarmentOmzetTargetLogic>()
                 .AddTransient<DOSalesLogic>()
@@ -274,25 +248,25 @@ namespace Com.Danliris.Service.Sales.WebApi
                 .AddTransient<DOAvalLogic>()
                 .AddTransient<DOStockLogic>()
                 .AddTransient<DeliveryNoteProductionLogic>();
-
         }
 
         private void RegisterServices(IServiceCollection services)
         {
             services
-                .AddScoped<IIdentityService,IdentityService>()
+                .AddScoped<IIdentityService, IdentityService>()
                 .AddScoped<IHttpClientService, HttpClientService>()
-                .AddScoped<IValidateService,ValidateService>();
+                .AddScoped<IValidateService, ValidateService>();
         }
 
         private void RegisterEndpoint()
         {
-            Com.Danliris.Service.Sales.WebApi.Utilities. APIEndpoint.Core = Configuration.GetValue<string>("CoreEndpoint") ?? Configuration["CoreEndpoint"];
-			Com.Danliris.Service.Sales.WebApi.Utilities.APIEndpoint.AzureCore = Configuration.GetValue<string>("AzureCoreEndpoint") ?? Configuration["AzureCoreEndpoint"];
-			Com.Danliris.Service.Sales.Lib.Helpers.APIEndpoint.StorageAccountName = Configuration.GetValue<string>("StorageAccountName") ?? Configuration["StorageAccountName"];
-			Com.Danliris.Service.Sales.Lib.Helpers.APIEndpoint.StorageAccountKey = Configuration.GetValue<string>("StorageAccountKey") ?? Configuration["StorageAccountKey"];
+            Com.Danliris.Service.Sales.WebApi.Utilities.APIEndpoint.Core = Configuration.GetValue<string>("CoreEndpoint") ?? Configuration["CoreEndpoint"];
+            Com.Danliris.Service.Sales.WebApi.Utilities.APIEndpoint.AzureCore = Configuration.GetValue<string>("AzureCoreEndpoint") ?? Configuration["AzureCoreEndpoint"];
+            Com.Danliris.Service.Sales.Lib.Helpers.APIEndpoint.StorageAccountName = Configuration.GetValue<string>("StorageAccountName") ?? Configuration["StorageAccountName"];
+            Com.Danliris.Service.Sales.Lib.Helpers.APIEndpoint.StorageAccountKey = Configuration.GetValue<string>("StorageAccountKey") ?? Configuration["StorageAccountKey"];
             Com.Danliris.Service.Sales.Lib.Helpers.APIEndpoint.AzurePurchasing = Configuration.GetValue<string>("AzurePurchasingEndpoint") ?? Configuration["PurchasingEndpoint"];
             Com.Danliris.Service.Sales.Lib.Helpers.APIEndpoint.Core = Configuration.GetValue<string>("CoreEndpoint") ?? Configuration["CoreEndpoint"];
+
             Lib.Helpers.APIEndpoint.Production = Configuration.GetValue<string>("ProductionEndpoint") ?? Configuration["ProductionEndpoint"];
             Lib.Helpers.APIEndpoint.Finance = Configuration.GetValue<string>("FinanceEndpoint") ?? Configuration["FinanceEndpoint"];
             Lib.Helpers.APIEndpoint.PackingInventory = Configuration.GetValue<string>("PackingInventoryEndpoint") ?? Configuration["PackingInventoryEndpoint"];
@@ -336,9 +310,9 @@ namespace Com.Danliris.Service.Sales.WebApi
                         IssuerSigningKey = Key
                     };
                 });
-		 
-			/* CORS */
-			services.AddCors(options => options.AddPolicy(SALES_POLICY, builder =>
+
+            /* CORS */
+            services.AddCors(options => options.AddPolicy(SALES_POLICY, builder =>
             {
                 builder.AllowAnyOrigin()
                        .AllowAnyMethod()
