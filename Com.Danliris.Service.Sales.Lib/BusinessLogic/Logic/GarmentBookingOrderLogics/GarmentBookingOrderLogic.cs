@@ -356,7 +356,7 @@ namespace Com.Danliris.Service.Sales.Lib.BusinessLogic.Logic.GarmentBookingOrder
             };
             var today = DateTime.Today;
             Query = Query
-                .Where(d => d.ConfirmedQuantity<d.OrderQuantity && d.DeliveryDate <= today.AddDays(45))
+                .Where(d => d.ConfirmedQuantity<d.OrderQuantity && d.DeliveryDate <= today.AddDays(40))
                  .Select(bo => new GarmentBookingOrder
                  {
                      Id = bo.Id,
